@@ -12,9 +12,9 @@ const Burger = (props)=>{
             burgerIngridients.push(<BurgerIngridient key={Math.random()} type={ingridientName}/>)
         }
     }
-    console.log(burgerIngridients);
+    //console.log(burgerIngridients);
     if(burgerIngridients.length === 0){
-        console.log('Empty ingridients');
+        //console.log('Empty ingridients');
         burgerIngridients=<p>Please start adding ingridients...</p>
     }
 
