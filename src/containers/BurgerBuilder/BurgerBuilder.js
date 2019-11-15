@@ -3,7 +3,16 @@ import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
+const INGRIDIENT_PRICES = {
+    "meat": 0.4,
+    "salad": 0.1,
+    "bacon": 0.3,
+    "cheese": 0.2
+};
+
 class BurgerBuilder extends Component{
+    isOrderable = false;
+
     constructor(props){
         super(props);
 
@@ -14,8 +23,23 @@ class BurgerBuilder extends Component{
                 "salad": 0,
                 "bacon": 0,
                 "cheese": 0
-            }     
+            },
+            totalPrice : 4     
         };
+    }
+
+    checkIfOrderAble = (ingridients)=>{
+        let qty = 0;
+        Object.keys(ingridients).forEach(
+            (key)=>{
+                qty += ingridients[key];
+            }
+        );        
+
+        if(qty === 0) this.isOrderable = false;
+        else this.isOrderable = true;        
+
+        /* console.log('qty : ', qty, 'isOrderable', this.isOrderable); */
     }
 
     increaseIngridient = (ingridient)=>{  
@@ -27,10 +51,13 @@ class BurgerBuilder extends Component{
 
                 newState[ingridient] = oldState.ingridients[ingridient] + 1;
 
-                console.log(newState);
+                this.checkIfOrderAble(newState);
+
+                const newPrice = oldState.totalPrice + INGRIDIENT_PRICES[ingridient];                
 
                 return {
-                    ingridients : newState
+                    ingridients: newState,
+                    totalPrice: newPrice
                 };
             }
         );
@@ -43,18 +70,17 @@ class BurgerBuilder extends Component{
                     ...oldState.ingridients
                 };
 
-                console.log(newState[ingridient]);
+                if(newState[ingridient] === 0) return null;                
 
-                if(newState[ingridient] === 0)
-                {
-                    console.log(newState[ingridient]);
-                    return null;
-                }
+                newState[ingridient] = oldState.ingridients[ingridient] - 1;       
+                
+                this.checkIfOrderAble(newState);
 
-                newState[ingridient] = oldState.ingridients[ingridient] - 1;                            
+                const newPrice = oldState.totalPrice - INGRIDIENT_PRICES[ingridient];
 
                 return {
-                    ingridients: newState
+                    ingridients: newState,
+                    totalPrice: newPrice
                 };
             }
         )
@@ -64,9 +90,13 @@ class BurgerBuilder extends Component{
         return (
             <div>
                 <div>Burger</div>
-                <Burger ingridients={this.state.ingridients}/>
-                {/* <div>Build controls</div> */}
-                <BuildControls ingridientsQtys={this.state.ingridients} incrementRef={(ingridient)=>this.increaseIngridient(ingridient)} decrementRef={this.decreaseIngridient}/>
+                <p>Total price ${this.state.totalPrice.toFixed(2)}</p>
+                <Burger ingridients={this.state.ingridients}/>                
+                <BuildControls
+                    ingridientsQtys={this.state.ingridients}
+                    incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
+                    decrementRef={this.decreaseIngridient}
+                    orderDisabled={!this.isOrderable} />
             </div>
         );
     }

@@ -29,6 +29,12 @@ const BuildControls = (props)=>
                 qty={props.ingridientsQtys['bacon']}
                 clickPlus={()=>{props.incrementRef('bacon')}}
                 clickMinus={()=>{props.decrementRef('bacon')}} />
+
+            <button
+                className={classes.OrderButton}
+                disabled={props.orderDisabled}
+            >
+            Order</button>
         </div>
     )
 
