@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
+import Modal from '../../components/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+
 const INGRIDIENT_PRICES = {
     "meat": 0.4,
     "salad": 0.1,
@@ -97,6 +100,9 @@ class BurgerBuilder extends Component{
                     incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
                     decrementRef={this.decreaseIngridient}
                     orderDisabled={!this.isOrderable} />
+                <Modal>
+                    <OrderSummary ingridients={this.state.ingridients} totalPrice={this.state.totalPrice}/>
+                </Modal>
             </div>
         );
     }

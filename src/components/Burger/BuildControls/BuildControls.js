@@ -7,25 +7,25 @@ const BuildControls = (props)=>
     (
         <div className={classes.BuildControls}>
             <BuildControl
-                label="Meat"
+                label="Pljeskavica"
                 qty={props.ingridientsQtys['meat']}
                 clickPlus={()=>{props.incrementRef('meat')}}
                 clickMinus={()=>{props.decrementRef('meat')}} />
 
             <BuildControl
-                label="Cheese"
+                label="Sir"
                 qty={props.ingridientsQtys['cheese']}
                 clickPlus={()=>{props.incrementRef('cheese')}}
                 clickMinus={()=>{props.decrementRef('cheese')}} />
                 
             <BuildControl
-                label="Salad"
+                label="Salata"
                 qty={props.ingridientsQtys['salad']}
                 clickPlus={()=>{props.incrementRef('salad')}}
                 clickMinus={()=>{props.decrementRef('salad')}} />
 
             <BuildControl
-                label="Bacon"
+                label="Slanina"
                 qty={props.ingridientsQtys['bacon']}
                 clickPlus={()=>{props.incrementRef('bacon')}}
                 clickMinus={()=>{props.decrementRef('bacon')}} />
