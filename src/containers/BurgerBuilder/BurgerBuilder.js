@@ -27,7 +27,8 @@ class BurgerBuilder extends Component{
                 "bacon": 0,
                 "cheese": 0
             },
-            totalPrice : 4     
+            totalPrice : 4,
+            orderInProgress: false
         };
     }
 
@@ -89,6 +90,22 @@ class BurgerBuilder extends Component{
         )
     }
 
+    orderClicked = ()=>{
+        console.log('orderClicked');
+
+        this.setState({
+            orderInProgress: true
+        });
+    }
+
+    orderUnClicked = ()=>{
+        console.log('orderRaskliknut...');
+
+        this.setState({
+            orderInProgress: false
+        });
+    }
+
     render() {
         return (
             <div>
@@ -99,8 +116,12 @@ class BurgerBuilder extends Component{
                     ingridientsQtys={this.state.ingridients}
                     incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
                     decrementRef={this.decreaseIngridient}
-                    orderDisabled={!this.isOrderable} />
-                <Modal>
+                    orderDisabled={!this.isOrderable} 
+                    orderClicked={this.orderClicked}/>
+                <Modal
+                    show={this.state.orderInProgress}
+                    unclicked={this.orderUnClicked}
+                >
                     <OrderSummary ingridients={this.state.ingridients} totalPrice={this.state.totalPrice}/>
                 </Modal>
             </div>

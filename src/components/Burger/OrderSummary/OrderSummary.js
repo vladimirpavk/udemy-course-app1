@@ -19,7 +19,6 @@ const OrderSummary = (props)=>{
             </ul>
             <h3>Total price : ${props.totalPrice}</h3>        
             <button>Confirm order</button>   
-            <label>The End</label> 
         </div>       
     )
 }
