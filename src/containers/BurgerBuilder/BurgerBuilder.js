@@ -106,6 +106,13 @@ class BurgerBuilder extends Component{
         });
     }
 
+    orderModalClicked = ()=>{
+        console.log('onOrderModalClicked...');
+
+        alert('You continued...');
+        this.orderUnClicked();
+    }
+
     render() {
         return (
             <div>
@@ -122,7 +129,11 @@ class BurgerBuilder extends Component{
                     show={this.state.orderInProgress}
                     unclicked={this.orderUnClicked}
                 >
-                    <OrderSummary ingridients={this.state.ingridients} totalPrice={this.state.totalPrice}/>
+                    <OrderSummary
+                        ingridients={this.state.ingridients}
+                        totalPrice={this.state.totalPrice}
+                        confirmed={this.orderModalClicked}
+                        canceled={this.orderUnClicked}/>
                 </Modal>
             </div>
         );

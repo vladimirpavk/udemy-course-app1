@@ -17,8 +17,9 @@ const OrderSummary = (props)=>{
             <ul>
                 {ingridientList}
             </ul>
-            <h3>Total price : ${props.totalPrice}</h3>        
-            <button>Confirm order</button>   
+            <h3>Total price : ${props.totalPrice.toFixed(2)}</h3>        
+            <button onClick={()=>{props.confirmed()}}>Confirm order</button>
+            <button onClick={()=>{props.canceled()}}>Cancel order</button>
         </div>       
     )
 }
