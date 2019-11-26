@@ -49,6 +49,7 @@ class Layout extends Component{
                     show={this.state.layout.isSideDrawerOpened}
                     backDropClicked={this.backDropUnclicked}
                 />
+                
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
