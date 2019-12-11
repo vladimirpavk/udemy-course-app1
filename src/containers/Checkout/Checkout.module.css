@@ -1,0 +1,28 @@
+.Checkout{
+    width: 100%;    
+}
+
+.dugmici{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;    
+    margin: auto;   
+}
+
+.continue{
+    font-size: 100%;
+    border-radius: 15px;
+    border: 1px solid silver;
+
+    color:green;
+    background-color: transparent;    
+}
+
+.cancel{
+    font-size: 100%;
+    border-radius: 15px;
+    border: 1 px solid silver;
+
+    color: red;
+    background-color: transparent;
+}

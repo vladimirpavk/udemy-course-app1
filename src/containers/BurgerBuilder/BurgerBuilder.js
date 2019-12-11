@@ -107,9 +107,13 @@ class BurgerBuilder extends Component{
     }
 
     orderModalClicked = ()=>{
-        console.log('onOrderModalClicked...');
+        /* console.log('onOrderModalClicked...');
 
         alert('You continued...');
+        console.log(this.props); */        
+
+        this.props.history.push('/checkout');
+
         this.orderUnClicked();
     }
 
