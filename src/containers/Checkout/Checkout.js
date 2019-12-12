@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 import classes from './Checkout.module.css';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import ContactData from './ContactData/ContactData';
 
 class Checkout extends Component{
     
@@ -19,7 +21,24 @@ class Checkout extends Component{
         };
 
     }
-    
+
+    componentDidMount(){
+        const queryString = this.props.location.search.slice(1, this.props.location.search.legth);
+        const queryArray = queryString.split('&');
+        //console.log('queryArray - ', queryArray);
+        const newIngridients = {};
+
+        queryArray.forEach(element => {
+            const valuePair = element.split('=');
+            //console.log('element  -', element, 'valuePair - ', valuePair);
+            newIngridients[valuePair[0]] = valuePair[1]; 
+        });                   
+        //console.log(newIngridients);
+        this.setState({
+            ingridients: newIngridients
+        });
+   }
+
     render(){
         return(
             <div className={classes.Checkout}>
@@ -33,6 +52,7 @@ class Checkout extends Component{
                         onClick={()=>this.props.history.replace('/checkout/contact-data')}>Continue</button>
                 </div>                
             </div>
+            <Route path='/checkout/contact-data' component={ContactData} />
         );        
     }
 }   
