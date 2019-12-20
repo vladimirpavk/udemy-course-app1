@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Aux from '../Hoc/Aux';
 import BurgerIngridient from './BurgerIngridients/BurgerIngridient';
@@ -27,4 +28,10 @@ const Burger = (props)=>{
     );
 }
 
-export default Burger;
+const mapStateToProps = (state)=>{
+    return{
+        ingridients: state.ingridients
+    }    
+}
+
+export default connect(mapStateToProps)(Burger);

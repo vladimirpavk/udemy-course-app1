@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import * as ACTION from '../../../store/actions';
+
 import classes from './BuildControls.module.css';
 
 import BuildControl from './BuildControl/BuildControl';
@@ -37,7 +40,29 @@ const BuildControls = (props)=>
             >
             Order</button>
         </div>
-    )
+    );
 
+const mapStateToProps = (state)=>{
+    return {
+        ingridientsQtys: state.ingridients
+    }
+}
 
-export default BuildControls;
+const mapDispatchToState = (dispatch)=>{
+    return{
+        incrementRef: (ingridient)=>{
+            dispatch({
+                type: ACTION.INCREASE_INGRIDIENT,
+                payload: ingridient
+            })
+        },
+        decrementRef: (ingridient)=>{
+            dispatch({
+                type: ACTION.DECREASE_INGRIDIENT,
+                payload: ingridient
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToState)(BuildControls);

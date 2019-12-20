@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
@@ -13,83 +14,16 @@ const INGRIDIENT_PRICES = {
     "cheese": 0.2
 };
 
-class BurgerBuilder extends Component{
-    isOrderable = false;
+class BurgerBuilder extends Component{   
 
     constructor(props){
         super(props);
-
-        //state i.e.
+        
         this.state = {
-            ingridients: {
-                "meat": 0,
-                "salad": 0,
-                "bacon": 0,
-                "cheese": 0
-            },
-            totalPrice : 4,
             orderInProgress: false
         };
     }
-
-    checkIfOrderAble = (ingridients)=>{
-        let qty = 0;
-        Object.keys(ingridients).forEach(
-            (key)=>{
-                qty += ingridients[key];
-            }
-        );        
-
-        if(qty === 0) this.isOrderable = false;
-        else this.isOrderable = true;        
-
-        /* console.log('qty : ', qty, 'isOrderable', this.isOrderable); */
-    }
-
-    increaseIngridient = (ingridient)=>{  
-        this.setState(
-            (oldState)=>{
-                const newState = {
-                    ...oldState.ingridients
-                };
-
-                newState[ingridient] = oldState.ingridients[ingridient] + 1;
-
-                this.checkIfOrderAble(newState);
-
-                const newPrice = oldState.totalPrice + INGRIDIENT_PRICES[ingridient];                
-
-                return {
-                    ingridients: newState,
-                    totalPrice: newPrice
-                };
-            }
-        );
-    }
-
-    decreaseIngridient = (ingridient)=>{
-        this.setState(
-            (oldState)=>{
-                const newState = {
-                    ...oldState.ingridients
-                };
-
-                if(newState[ingridient] === 0) return null;                
-
-                newState[ingridient] = oldState.ingridients[ingridient] - 1;       
-                
-                this.checkIfOrderAble(newState);
-
-                const newPrice = oldState.totalPrice - INGRIDIENT_PRICES[ingridient];
-
-                return {
-                    ingridients: newState,
-                    totalPrice: newPrice
-                };
-            }
-        )
-    }
-
+   
     orderClicked = ()=>{
         console.log('orderClicked');
 
@@ -132,15 +66,21 @@ class BurgerBuilder extends Component{
         return (
             <div>
                 <div>Burger</div>
-                <p>Total price ${this.state.totalPrice.toFixed(2)}</p>
-                <Burger ingridients={this.state.ingridients}/>                
+                <h2>Vertigo City</h2>
+                <h3>PAVLE</h3>
+                <p>Total price ${this.props.totalPrice.toFixed(2)}</p>
+                <Burger />
                 <BuildControls
-                    ingridientsQtys={this.state.ingridients}
-                    incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
+                    orderDisabled={!this.props.isOrderable} 
+                    orderClicked={this.orderClicked}/>
+                {/* <Burger ingridients={this.props.ingridients}/> */}           
+               {/*  <BuildControls
+                    ingridientsQtys={this.props.ingridients}/> */}
+                  {/*   incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
                     decrementRef={this.decreaseIngridient}
                     orderDisabled={!this.isOrderable} 
-                    orderClicked={this.orderClicked}/>
-                <Modal
+                    orderClicked={this.orderClicked}/> */}
+              {/*   <Modal
                     show={this.state.orderInProgress}
                     unclicked={this.orderUnClicked}
                 >
@@ -149,10 +89,17 @@ class BurgerBuilder extends Component{
                         totalPrice={this.state.totalPrice}
                         confirmed={this.orderModalClicked}
                         canceled={this.orderUnClicked}/>
-                </Modal>
+                </Modal> */}
             </div>
         );
     }
 }
 
-export default BurgerBuilder;
+const mapStateToProps = (state)=>{
+    return {
+        totalPrice: state.totalPrice,
+        isOrderable: state.isOrderable
+    }
+}
+
+export default connect(mapStateToProps)(BurgerBuilder);

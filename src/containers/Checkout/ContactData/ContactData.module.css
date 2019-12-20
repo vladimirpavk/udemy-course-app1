@@ -1,4 +1,5 @@
 .ContactData{
+    box-sizing: border-box;
 }
 
 .ContactData form{
@@ -14,6 +15,11 @@
     font-size: 32px;
 }
 
+.ContactData form input:focus{
+    background-color: gray;
+}
+
 .ContactData form button{
+    font-family: inherit;
     font-size: 32px;
 }

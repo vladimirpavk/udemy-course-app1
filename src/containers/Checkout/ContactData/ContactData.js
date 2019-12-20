@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
 import classes from './ContactData.module.css';
+import { appendToMemberExpression } from '@babel/types';
 
 class ContactData extends Component{
+    nameInput;
+
     constructor(props){
         super(props);
 
@@ -11,20 +14,69 @@ class ContactData extends Component{
             email: '',
             address: {
                 street: '',
-                postalCode : ''
+                postalCode: ''
             }
         };
+    }
+
+    onFormSubmittedHandler = (event)=>{
+        event.preventDefault();
+       console.log(this.state);
+    }
+
+    onNameChanged = (event)=>{
+        this.setState({
+            name: event.target.value
+        });
+    }
+
+    onEmailChanged = (event)=>{
+        this.setState({
+            email: event.target.value
+        });
+    }
+
+    onStreetChanged = (event)=>{
+        console.log('onStreetChanged...');        
+    }
+
+    onPostalCodeChanged = (event)=>{
+        this.setState({
+            address:{
+                postalCode: event.target.value
+            }
+        })
     }
 
     render(){
         return(
             <div className={classes.ContactData}>
                 <h1>Contact Data</h1>
-                <form>
-                    <input type="text" name="name" placeholder="Your name" />
-                    <input type="text" name="email" placeholder="Your email" />
-                    <input type="text" name="street" placeholder="Street" />
-                    <input type="text" name="postalCode" placeholder="Postal code" />
+                <form onSubmit={this.onFormSubmittedHandler}>
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Your name"
+                        onChange={this.onNameChanged}
+                    />
+                    <input
+                        type="text"
+                        name="email"
+                        placeholder="Your email"
+                        onChange={this.onEmailChanged}
+                    />
+                    <input
+                        type="text"
+                        name="street"
+                        placeholder="Street"
+                        onChange={this.onStreetChanged}
+                    />
+                    <input
+                        type="text"
+                        name="postalCode"
+                        placeholder="Postal code"
+                        onChange={this.onPostalCodeChanged}
+                    />
                     <button type="submit">ORDER</button>
                 </form>
             </div>
