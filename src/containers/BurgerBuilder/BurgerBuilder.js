@@ -72,14 +72,7 @@ class BurgerBuilder extends Component{
                 <Burger />
                 <BuildControls
                     orderDisabled={!this.props.isOrderable} 
-                    orderClicked={this.orderClicked}/>
-                {/* <Burger ingridients={this.props.ingridients}/> */}           
-               {/*  <BuildControls
-                    ingridientsQtys={this.props.ingridients}/> */}
-                  {/*   incrementRef={(ingridient)=>this.increaseIngridient(ingridient)}
-                    decrementRef={this.decreaseIngridient}
-                    orderDisabled={!this.isOrderable} 
-                    orderClicked={this.orderClicked}/> */}
+                    orderClicked={this.orderClicked}/>           
               {/*   <Modal
                     show={this.state.orderInProgress}
                     unclicked={this.orderUnClicked}

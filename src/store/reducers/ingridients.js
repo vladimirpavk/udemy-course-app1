@@ -1,75 +1,58 @@
 import * as ACTION from '../actions';
 import INGRIDIENT_PRICES from './prices';
 
-const initialState ={
+const initialState ={  
+    ingridientList : [],
+    totalPrice: 4,
+    isOrderable: false,
     ingridients: {
         "meat": 0,
         "salad": 0,
         "bacon": 0,
         "cheese": 0
     },
-    ingridientList : [],
-    totalPrice: 4,
-    isOrderable: false
-}
-
-const checkIfOrderAble = (ingridients)=>{
-    let qty = 0;
-    Object.keys(ingridients).forEach(
-        (key)=>{
-            qty += ingridients[key];
-        }
-    );        
-  
-    if(qty === 0) return false;
-    else return true;
-}      
+}    
 
 const reducer = (state=initialState, action)=>{
     switch(action.type){
-        case(ACTION.INCREASE_INGRIDIENT):{
-
-            const newIngridients = {
-                ...state.ingridients
-            };
-            newIngridients[action.payload] = state.ingridients[action.payload] + 1;          
+        case(ACTION.INCREASE_INGRIDIENT):{               
 
             const newPrice = state.totalPrice + INGRIDIENT_PRICES[action.payload];                
+            const newIngridientList = state.ingridientList.concat(action.payload);
 
-            return {
-                ingridients: newIngridients,
+            const newIngridients = { ...state.ingridients };
+            newIngridients[action.payload] = state.ingridients[action.payload] + 1;
+            
+            return {               
                 totalPrice: newPrice,
-                isOrderable: checkIfOrderAble(newIngridients),
-                ingridientList: state.ingridientList.concat(action.payload)
+                isOrderable: true,
+                ingridientList: newIngridientList,
+                ingridients: newIngridients
             };
         }
-        case(ACTION.DECREASE_INGRIDIENT):{
-            const newState = {
-                ...state.ingridients
-            };
 
-            if(newState[action.payload] === 0) return{
-                ingridients: newState,
-                totalPrice: 0,
-                isOrderable: checkIfOrderAble(state.ingridients)
-            }                
+        case(ACTION.DECREASE_INGRIDIENT):{        
 
-            newState[action.payload] = state.ingridients[action.payload] - 1;                    
+            if(state.ingridientList.indexOf(action.payload) === -1) return { ...state };                             
 
             const newPrice = state.totalPrice - INGRIDIENT_PRICES[action.payload];
 
+            const newIngridients = { ...state.ingridients };            
+            newIngridients[action.payload] = state.ingridients[action.payload] - 1;
+
             let newIngridientList = [];
-            const indexOfIngridient = state.ingridientList.indexOf(action.payload);
-            if(indexOfIngridient !== -1){
-                //exists in a list
-                newIngridientList = [...state.ingridientList.splice(indexOfIngridient)];
-            }
             
-            return {
-                ingridients: newState,
+            const tempIngridientList = [...state.ingridientList.reverse()];
+            const indexOfIngridient = tempIngridientList.indexOf(action.payload);
+
+            tempIngridientList.splice(indexOfIngridient, 1);
+            newIngridientList = [...tempIngridientList.reverse()];
+            
+            return {                
                 totalPrice: newPrice,
-                isOrderable: checkIfOrderAble(newState),
-                ingridientList: newIngridientList
+                isOrderable: state.ingridientList.length > 0 ? true : false,
+                ingridientList: newIngridientList,
+                ingridients: newIngridients
             };
         }
         default:

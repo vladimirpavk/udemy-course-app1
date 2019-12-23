@@ -8,14 +8,11 @@ import classes from './Burger.module.css';
 const Burger = (props)=>{
     //console.log(props.ingridients);
     let burgerIngridients = [];
-    for(let ingridientName in props.ingridients){
-        for(let i=0; i<props.ingridients[ingridientName]; i++){
-            burgerIngridients.push(<BurgerIngridient key={Math.random()} type={ingridientName}/>)
-        }
-    }
-    //console.log(burgerIngridients);
-    if(burgerIngridients.length === 0){
-        //console.log('Empty ingridients');
+    props.ingridients.forEach(ingridient => {
+        burgerIngridients.push(<BurgerIngridient key={Math.random()} type={ingridient}/>)
+    });
+  
+    if(burgerIngridients.length === 0){       
         burgerIngridients=<p>Please start adding ingridients...</p>
     }
 
@@ -29,8 +26,8 @@ const Burger = (props)=>{
 }
 
 const mapStateToProps = (state)=>{
-    return{
-        ingridients: state.ingridients
+    return{        
+        ingridients: state.ingridientList
     }    
 }
 

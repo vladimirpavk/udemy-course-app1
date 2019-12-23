@@ -6,6 +6,15 @@ import classes from './BuildControls.module.css';
 
 import BuildControl from './BuildControl/BuildControl';
 
+const countElement = (array, refElement)=>{
+    const newArray = array.filter(
+                        (element)=>{
+                            return element === refElement;
+                        }
+                    );
+    return newArray.length;
+}
+
 const BuildControls = (props)=>
     (
         <div className={classes.BuildControls}>
