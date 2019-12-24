@@ -25,8 +25,6 @@ class BurgerBuilder extends Component{
     }
    
     orderClicked = ()=>{
-        console.log('orderClicked');
-
         this.setState({
             orderInProgress: true
         });
@@ -40,18 +38,13 @@ class BurgerBuilder extends Component{
         });
     }
 
-    orderModalClicked = ()=>{
-        /* console.log('onOrderModalClicked...');
-
-        alert('You continued...');
-        console.log(this.props); */        
+    orderModalClicked = ()=>{     
         const queryParams = [];        
-        Object.entries(this.state.ingridients).forEach(
+        Object.entries(this.props.ingridients).forEach(
              ([key, value])=>{
                 queryParams.push(encodeURIComponent(key)+'='+encodeURIComponent(value));
         });
-        const queryString = queryParams.join('&');
-        //console.log(queryString);
+        const queryString = queryParams.join('&');        
 
         this.props.history.push(
             {
@@ -73,16 +66,13 @@ class BurgerBuilder extends Component{
                 <BuildControls
                     orderDisabled={!this.props.isOrderable} 
                     orderClicked={this.orderClicked}/>           
-              {/*   <Modal
+                <Modal
                     show={this.state.orderInProgress}
-                    unclicked={this.orderUnClicked}
-                >
-                    <OrderSummary
-                        ingridients={this.state.ingridients}
-                        totalPrice={this.state.totalPrice}
+                    unclicked={this.orderUnClicked}>
+                   <OrderSummary
                         confirmed={this.orderModalClicked}
                         canceled={this.orderUnClicked}/>
-                </Modal> */}
+                </Modal> 
             </div>
         );
     }
@@ -91,7 +81,8 @@ class BurgerBuilder extends Component{
 const mapStateToProps = (state)=>{
     return {
         totalPrice: state.totalPrice,
-        isOrderable: state.isOrderable
+        isOrderable: state.isOrderable,
+        ingridients: state.ingridients
     }
 }
 

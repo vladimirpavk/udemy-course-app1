@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import classes from './OrderSummary.module.css';
 
@@ -24,4 +25,11 @@ const OrderSummary = (props)=>{
     )
 }
 
-export default OrderSummary;
+const mapStateToProps=(state)=>{
+    return{
+        ingridients: state.ingridients,
+        totalPrice: state.totalPrice
+    }
+}
+
+export default connect(mapStateToProps)(OrderSummary);

@@ -21,7 +21,9 @@ class ContactData extends Component{
 
     onFormSubmittedHandler = (event)=>{
         event.preventDefault();
-       console.log(this.state);
+        console.log(this.state);
+        //this.props.history.push('/');
+        console.log(this.props);
     }
 
     onNameChanged = (event)=>{
