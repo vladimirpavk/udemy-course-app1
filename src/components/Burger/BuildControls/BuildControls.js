@@ -59,18 +59,8 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToState = (dispatch)=>{
     return{
-        incrementRef: (ingridient)=>{
-            dispatch({
-                type: ACTION.INCREASE_INGRIDIENT,
-                payload: ingridient
-            })
-        },
-        decrementRef: (ingridient)=>{
-            dispatch({
-                type: ACTION.DECREASE_INGRIDIENT,
-                payload: ingridient
-            })
-        }
+        incrementRef: (ingridient)=>dispatch(ACTION.increaseIngridient(ingridient)),
+        decrementRef: (ingridient)=>dispatch(ACTION.decreaseIngridient(ingridient))        
     }
 }
 
