@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import classes from './Auth.css';
+import classes from './Auth.module.css';
 import * as actions from '../../store/actions';
 
 class Auth extends Component {
@@ -91,12 +91,12 @@ class Auth extends Component {
 
     render () {
         const formElementsArray = [];
-        for ( let key in this.state.controls ) {
+        for ( let key in this.state.controls ) {            
             formElementsArray.push( {
                 id: key,
                 config: this.state.controls[key]
             } );
-        }
+        }        
 
         const form = formElementsArray.map( formElement => (
             <Input
@@ -112,7 +112,8 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
-                <form onSubmit={this.submitHandler}>
+                <h4>Pavle Pavković</h4>
+                <form onSubmit={this.submitHandler} className={classes.myForm}>
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
                 </form>

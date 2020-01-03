@@ -58,7 +58,7 @@ class BurgerBuilder extends Component{
     render() {
         return (
             <div>
-                <div>Burger</div>
+                <h1>Burger</h1>
                 <h2>Vertigo City</h2>
                 <h3>PAVLE</h3>
                 <p>Total price ${this.props.totalPrice.toFixed(2)}</p>

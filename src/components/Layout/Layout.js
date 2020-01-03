@@ -41,18 +41,17 @@ class Layout extends Component{
 
     render(){
         return (
-            <div>
+            <div>               
                 <Toolbar 
-                    menuClicked={this.openSideDrawer} />        
+                    menuClicked={this.openSideDrawer} />                        
 
-                <SideDrawer
+              {/*   <SideDrawer
                     show={this.state.layout.isSideDrawerOpened}
                     backDropClicked={this.backDropUnclicked}
-                />
-                
+                /> */}                
                 <main className={classes.Content}>
                     {this.props.children}
-                </main>
+                </main>                
             </div>
         );               
     }   
