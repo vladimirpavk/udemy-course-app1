@@ -5,6 +5,8 @@ import reducer from './store/reducers/ingridients';
 
 import * as ReactRedux from 'react-redux';
 
+import ReduxThunk from 'redux-thunk';
+
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
@@ -23,7 +25,7 @@ const actionLogger = (store)=>{
   }
 }
 
-const store=Redux.createStore(reducer, Redux.applyMiddleware(actionLogger));
+const store=Redux.createStore(reducer, Redux.applyMiddleware(actionLogger, ReduxThunk));
 
 function App() { 
   return (    
