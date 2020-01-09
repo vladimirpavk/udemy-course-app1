@@ -1,7 +1,8 @@
 import React from 'react';
 
 import * as Redux from 'redux';
-import reducer from './store/reducers/ingridients';
+import ingridientReducer from './store/reducers/ingridients';
+import authReducer from './store/reducers/auth';
 
 import * as ReactRedux from 'react-redux';
 
@@ -25,7 +26,16 @@ const actionLogger = (store)=>{
   }
 }
 
-const store=Redux.createStore(reducer, Redux.applyMiddleware(actionLogger, ReduxThunk));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || Redux.compose;
+
+const store=Redux.createStore(
+  Redux.combineReducers({
+    ingridient: ingridientReducer,
+    auth: authReducer
+  }),
+  composeEnhancers(
+    Redux.applyMiddleware(actionLogger, ReduxThunk)
+  ));
 
 function App() { 
   return (    
@@ -44,5 +54,7 @@ function App() {
     </ReactRedux.Provider>
   );
 }
+
+
 
 export default App;

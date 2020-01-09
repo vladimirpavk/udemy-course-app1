@@ -87,6 +87,7 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+        //this.props.onAuth('vladimirpavk@gmail.com', 'observer123');
     }
 
     render () {
@@ -117,15 +118,24 @@ class Auth extends Component {
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
                 </form>
+                {
+                    this.props.loginFailed ? <p className={classes.Error}>Login failed...</p> : null
+                }
             </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onAuth: (email, password) => dispatch(actions.autorizeUser(email, password))
     };
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+const mapStateToProps = (state) =>{
+    return{
+      loginFailed: state.auth.triedToLogin
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
