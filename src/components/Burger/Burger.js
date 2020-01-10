@@ -27,7 +27,7 @@ const Burger = (props)=>{
 
 const mapStateToProps = (state)=>{
     return{        
-        ingridients: state.ingridientList
+        ingridients: state.ingridients.ingridientList
     }    
 }
 

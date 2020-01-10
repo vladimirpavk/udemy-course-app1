@@ -27,8 +27,8 @@ const OrderSummary = (props)=>{
 
 const mapStateToProps=(state)=>{
     return{
-        ingridients: state.ingridients,
-        totalPrice: state.totalPrice
+        ingridients: state.ingridients.ingridients,
+        totalPrice: state.ingridients.totalPrice
     }
 }
 

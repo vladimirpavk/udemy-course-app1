@@ -27,7 +27,7 @@
     color: lightblue;
 }
 
-@media(min-width:500px){
+@media(min-width:700px){
 
     .NavigationItems{
         flex-flow: row;             

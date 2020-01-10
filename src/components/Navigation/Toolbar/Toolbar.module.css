@@ -11,7 +11,7 @@
     box-sizing: border-box;
 }
 
-@media(max-width:499px){
+@media(max-width:699px){
     .DesktopOnly{
         display: none;
     }
