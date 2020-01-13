@@ -49,14 +49,12 @@ const store=Redux.createStore(
 ));
 
 const reactComponent = (
-    <ReactRedux.Provider store={store}>
-    <div className="App">          
+    <ReactRedux.Provider store={store}>       
       <BrowserRouter>
         <Layout>
          <App />
         </Layout>  
-      </BrowserRouter>         
-    </div> 
+      </BrowserRouter>            
   </ReactRedux.Provider>
 );
 

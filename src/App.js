@@ -29,7 +29,7 @@ const App = (props)=>
   }
 
   return (
-    <div>
+    <div className="App">
       {routes}
     </div>
   )
