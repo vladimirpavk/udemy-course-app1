@@ -1,19 +1,40 @@
 .Auth {
     font-style: inherit;
     margin: auto;
-    width: 80%;
-    text-align: center;
-    box-shadow: 0 2px 3px #ccc;
-    padding: 10px;
+    width: 100%;
+    text-align: center;    
+    padding-top: 10%;
     box-sizing: border-box;  
+    height: 100%;
 }
 
-/* .myForm input{
-    font-family: inherit;
-    font-size: 20px;
-    width: 80%
+.Auth form{    
+    margin: 0;
+   /*  position: absolute;
+    top: 50%;
+    left: 50%;   
+    transform: translate(-50%, -50%);     */
+    width: 100%;
+    padding-top: 10%;
 }
- */
+
+.Title{
+    font-size: 2em;
+    background: -webkit-linear-gradient(rgb(238, 177, 10), rgb(230, 8, 8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.Burger{
+    background: url('hamburger.png');
+    background-size: 256px 256px;
+    width: 256px;
+    height: 256px;  
+    margin: auto;    
+}
+
 .Error {
    color: red;
 }

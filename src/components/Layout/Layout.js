@@ -43,7 +43,7 @@ class Layout extends Component{
 
     render(){
         return (
-            <div>
+            <div className={classes.main}>
                 { !this.props.isAuth ? null :  <Toolbar menuClicked={this.openSideDrawer} /> }
                                        
               {/*   <SideDrawer

@@ -6,7 +6,8 @@ export const DECREASE_INGRIDIENT = 'DECREASE INGRIDIENT';
 //export const AUTH_USER = 'AUTHORIZE USER';
 export const USER_LOGGED_IN = 'USER LOGGED IN';
 export const USER_FAILED_TO_LOG_IN = 'USER FAILED TO LOGIN';
-
+export const START_AUTHORIZING = 'START LOGIN PROCESS';
+export const STOP_AUTHORIZING = 'STOP LOGIN PROCESS';
 
 //action creators
 export const increaseIngridient = (ingridient)=>{
@@ -33,6 +34,18 @@ export const decreaseIngridient = (ingridient)=>{
     }
 } */
 
+const startAuthorizing = ()=>{
+    return{
+        type: START_AUTHORIZING
+    }
+}
+
+const stopAuthorizing = ()=>{
+    return{
+        type: STOP_AUTHORIZING
+    }
+}
+
 const userLoggedIn = (userCredentials)=>{
     return{
         type: USER_LOGGED_IN,
@@ -48,6 +61,7 @@ const userFailedToLogIn = ()=>{
 
 export const autorizeUser = (username, password)=>{
     return (dispatch)=>{
+        dispatch(startAuthorizing());
         firebase.auth().signInWithEmailAndPassword(username, password).then(
             (userCredentials)=>{
                 //console.log('Sign In Successfull...', userCredential);
@@ -60,11 +74,13 @@ export const autorizeUser = (username, password)=>{
                         console.log(error);
                     }
                 ) */
+                dispatch(stopAuthorizing());
                 dispatch(userLoggedIn(userCredentials));
             }
         ).catch(
             (error)=>{
                 //console.log('Sign In unsuccessfull...');                
+                dispatch(stopAuthorizing());
                 dispatch(userFailedToLogIn());
             }            
         );

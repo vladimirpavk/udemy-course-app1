@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Spinner from '../UI/Spinner/Spinner';
+
 import classes from './Auth.module.css';
 import * as actions from '../../store/actions';
 
@@ -113,6 +115,11 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
+               {/*  {
+                    this.props.authorizing ? <p>Spining...</p> : null                
+                } */}
+                <h1 className={classes.Title}>Burger Mania</h1>
+                <div className={classes.Burger}></div>
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button btnType="Success">SUBMIT</Button>
@@ -120,6 +127,9 @@ class Auth extends Component {
                 {
                     this.props.loginFailed ? <p className={classes.Error}>Login failed...</p> : null
                 }
+               <p>{this.props.triedToLogin}</p>
+                {/* <Spinner /> */}
+               
             </div>
         );
     }
@@ -134,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) =>{
     return{
       loginFailed: state.auth.triedToLogin
+      //authorizing : state.auth.authorizing
     }
 }
 

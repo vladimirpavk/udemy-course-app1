@@ -48,14 +48,14 @@ const store=Redux.createStore(
         Redux.applyMiddleware(actionLogger, ReduxThunk)
 ));
 
-const reactComponent = (
+const reactComponent = (    
     <ReactRedux.Provider store={store}>       
       <BrowserRouter>
         <Layout>
          <App />
         </Layout>  
       </BrowserRouter>            
-  </ReactRedux.Provider>
+  </ReactRedux.Provider>  
 );
 
 ReactDOM.render(reactComponent, document.getElementById('root'));
