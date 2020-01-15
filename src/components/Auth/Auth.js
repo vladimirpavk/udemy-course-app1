@@ -112,24 +112,27 @@ class Auth extends Component {
                 touched={formElement.config.touched}
                 changed={( event ) => this.inputChangedHandler( event, formElement.id )} />
         ) );
+       /*  console.log(this.props.loginFailed);
+        let loginText;
+        if(this.props.loginFailed === 1)
+        {
+            loginText=<p>Login failed...</p>
+        } */
 
-        return (
+        return (            
             <div className={classes.Auth}>
-               {/*  {
-                    this.props.authorizing ? <p>Spining...</p> : null                
-                } */}
+                {
+                    this.props.authorizing ? <Spinner /> : null
+                }                                                    
                 <h1 className={classes.Title}>Burger Mania</h1>
-                <div className={classes.Burger}></div>
+                <div className={classes.Burger}></div>                
                 <form onSubmit={this.submitHandler}>
                     {form}
+                    {
+                        this.props.loginFailed ? <p className={classes.Error}>Login failed...</p> : null
+                    }  
                     <Button btnType="Success">SUBMIT</Button>
-                </form>
-                {
-                    this.props.loginFailed ? <p className={classes.Error}>Login failed...</p> : null
-                }
-               <p>{this.props.triedToLogin}</p>
-                {/* <Spinner /> */}
-               
+                </form>                                                                                     
             </div>
         );
     }
@@ -143,8 +146,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) =>{
     return{
-      loginFailed: state.auth.triedToLogin
-      //authorizing : state.auth.authorizing
+      loginFailed: state.auth.triedToLogin,
+      authorizing : state.auth.authorizing
     }
 }
 

@@ -62,27 +62,30 @@ const userFailedToLogIn = ()=>{
 export const autorizeUser = (username, password)=>{
     return (dispatch)=>{
         dispatch(startAuthorizing());
-        firebase.auth().signInWithEmailAndPassword(username, password).then(
-            (userCredentials)=>{
-                //console.log('Sign In Successfull...', userCredential);
-              /*   userCredential.user.getIdToken().then(
-                    (token)=>{
-                        console.log(token);
-                    }
-                ).catch(
-                    (error)=>{
-                        console.log(error);
-                    }
-                ) */
-                dispatch(stopAuthorizing());
-                dispatch(userLoggedIn(userCredentials));
-            }
-        ).catch(
-            (error)=>{
-                //console.log('Sign In unsuccessfull...');                
-                dispatch(stopAuthorizing());
-                dispatch(userFailedToLogIn());
-            }            
-        );
+        setTimeout(()=>{
+            firebase.auth().signInWithEmailAndPassword(username, password).then(
+                (userCredentials)=>{
+                    //console.log('Sign In Successfull...', userCredential);
+                  /*   userCredential.user.getIdToken().then(
+                        (token)=>{
+                            console.log(token);
+                        }
+                    ).catch(
+                        (error)=>{
+                            console.log(error);
+                        }
+                    ) */
+                    dispatch(stopAuthorizing());
+                    dispatch(userLoggedIn(userCredentials));
+                }
+            ).catch(
+                (error)=>{
+                    //console.log('Sign In unsuccessfull...');                
+                    dispatch(stopAuthorizing());
+                    dispatch(userFailedToLogIn());
+                }            
+            );
+        }, 1000);
+       
     }
 }
