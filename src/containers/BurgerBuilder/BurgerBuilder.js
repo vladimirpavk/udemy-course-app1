@@ -7,13 +7,6 @@ import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
-const INGRIDIENT_PRICES = {
-    "meat": 0.4,
-    "salad": 0.1,
-    "bacon": 0.3,
-    "cheese": 0.2
-};
-
 class BurgerBuilder extends Component{   
 
     constructor(props){
@@ -63,8 +56,7 @@ class BurgerBuilder extends Component{
                 <h3>PAVLE</h3>
                 <p>Total price ${this.props.totalPrice.toFixed(2)}</p>
                 <Burger />
-                <BuildControls
-                    orderDisabled={!this.props.isOrderable} 
+                <BuildControls                   
                     orderClicked={this.orderClicked}/>           
                 <Modal
                     show={this.state.orderInProgress}
@@ -80,9 +72,8 @@ class BurgerBuilder extends Component{
 
 const mapStateToProps = (state)=>{
     return {
-        totalPrice: state.ingridients.totalPrice,
-        isOrderable: state.isOrderable,
-        ingridients: state.ingridients
+        totalPrice: state.ingridients.totalPrice,       
+        ingridients: state.ingridients.ingridients
     }
 }
 

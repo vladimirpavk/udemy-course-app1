@@ -53,7 +53,8 @@ const BuildControls = (props)=>
 
 const mapStateToProps = (state)=>{
     return {
-        ingridientsQtys: state.ingridients
+        ingridientsQtys: state.ingridients.ingridients,
+        orderDisabled: !state.ingridients.isOrderable
     }
 }
 
